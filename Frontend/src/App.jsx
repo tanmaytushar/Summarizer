@@ -111,10 +111,7 @@ export default function App() {
       const plainBody = encodeURIComponent("Rich formatted content has been copied to your clipboard. Please paste it into your email.");
       
       window.location.href = `mailto:${to}?subject=${subject}&body=${plainBody}`;
-      
-      alert("Rich formatted email content copied to clipboard! Paste it into your email client for proper formatting.");
     }).catch(() => {
-      // Fallback to plain text email if clipboard fails
       const subject = "Meeting Summary";
       const bodyLines = [
         "Hi,",
