@@ -14,13 +14,11 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// Config struct
 type Config struct {
 	Port  string
 	AIKey string
 }
 
-// Request/Response structs
 type SummarizeRequest struct {
 	Transcript string `json:"transcript"`
 	Prompt     string `json:"prompt"`
@@ -36,7 +34,6 @@ type GeminiResponse struct {
 	} `json:"candidates"`
 }
 
-// Config functions
 func loadConfig() Config {
 	_ = godotenv.Load()
 
@@ -58,7 +55,6 @@ func getEnv(key, fallback string) string {
 	return fallback
 }
 
-// Handler function
 func summarizeHandler(c *gin.Context) {
 	var req SummarizeRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -113,12 +109,10 @@ func summarizeHandler(c *gin.Context) {
 }
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 	cfg := loadConfig()
+
 	r := gin.Default()
+
 	corsConfig := cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000", "http://localhost:3001", "http://127.0.0.1:3000", "*"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"},
@@ -126,7 +120,9 @@ func main() {
 		AllowCredentials: true,
 	}
 	r.Use(cors.New(corsConfig))
+
 	r.POST("/summarize", summarizeHandler)
+
 	fmt.Printf("Server running at http://localhost:%s\n", cfg.Port)
 	if err := r.Run(":" + cfg.Port); err != nil {
 		log.Fatal(err)
