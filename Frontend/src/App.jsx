@@ -487,7 +487,7 @@ export default function App() {
                   }}></div>
                 ) : (
                   <img 
-                    src="/src/assets/arrow-right-square.svg" 
+                    src="/assets/arrow-right-square.svg" 
                     alt="Send" 
                     width="14" 
                     height="14" 
