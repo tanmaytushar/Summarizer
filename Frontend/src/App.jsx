@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const API_URL = "http://localhost:8080/summarize";
+const API_URL = "https://summarizerbackend.onrender.com/summarize";
 
 export default function App() {
   const [file, setFile] = useState(null);
